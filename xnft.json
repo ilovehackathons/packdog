@@ -1,16 +1,17 @@
 {
-  "name": "xNFT",
+  "name": "Packdog",
   "version": "0.0.1",
-  "description": "xNFT description",
-  "website": "https://twitter.com/builderz__",
+  "description": "Mint your own image NFT using Underdog.",
+  "longDescription": "Mint mainnet NFTs from within Backpack for free! Choose a name for your NFT, specify the image URL and click 'Mint'! Powered by Underdog.",
+  "website": "https://github.com/ilovehackathons/packdog",
   "kind": "app",
   "storage": "ipfs",
   "icon": {
     "md": "./assets/builderz-logo.png"
   },
-  "contact": "https://twitter.com/builderz__",
+  "contact": "https://twitter.com/ihackhackathons",
   "tag": "nfts",
-  "programIds": ["9ZskGH9wtdwM9UXjBq1KDwuaLfrZyPChz41Hx7NWhTFf"],
+  "programIds": [""],
   "screenshots": ["./assets/screenshot1.png"],
   "entrypoints": {
     "default": {

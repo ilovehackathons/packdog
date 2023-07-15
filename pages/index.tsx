@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import Head from "next/head";
 
 import "react-toastify/dist/ReactToastify.css";
+import { createUnderdogClient } from "@underdog-protocol/js";
+import { useWallet } from "../hooks/useWallet";
+import { useState } from "react";
 
 if (typeof window !== 'undefined') {
   window.addEventListener('error', function (event) {
@@ -14,8 +17,52 @@ if (typeof window !== 'undefined') {
 }
 
 const Home: NextPage = () => {
-  const notify = () =>
-    toast("🦄 Wow so easy!");
+  // const notify = () =>
+  //   toast("🦄 Wow so easy!");
+
+  const mintNft = async () => {
+    setMinting(true)
+    console.log(`Minting ${name} (${url}) for ${base58}...`)
+
+    const params = {
+      // type: {
+      //   transferable: false,
+      //   compressed: true,
+      // },
+      projectId: 4,
+    };
+
+    try {
+      const result = await underdogClient.createNft({
+        params,
+        body: {
+          name: name?.length ? name : 'Packdog',
+          image: url?.length ? url : 'https://dev.updg8.com/imgdata/2WZMBfMsZoXoEYk6tTP35e31LKX1cApU73Y73mTePaQN',
+          upsert: true,
+          receiverAddress: base58,
+          attributes: {
+            "Minter's wallet": 'https://backpack.app',
+            "Minting API": 'https://underdogprotocol.com',
+          }
+        }
+      })
+      console.log('result', result)
+      toast("The NFT is in your wallet!");
+    } catch (e: any) {
+      console.log('Error:', e)
+      toast("Error: " + e?.message)
+    }
+    setUrl("")
+    setName("")
+    setMinting(false)
+  }
+
+  const underdogClient = createUnderdogClient({});
+  const base58 = useWallet().publicKey?.toBase58()
+
+  const [url, setUrl] = useState("")
+  const [name, setName] = useState("")
+  const [minting, setMinting] = useState(false)
 
   return (
     <>
@@ -34,7 +81,8 @@ const Home: NextPage = () => {
               >
                 {" "}
                 <Image
-                  src="/builderz-white.svg"
+                  // src="/builderz-white.svg"
+                  src="/packdog.png"
                   height='160'
                   width='150'
                   priority
@@ -44,23 +92,31 @@ const Home: NextPage = () => {
                   alt="builderz"
                 />
               </a>
-              <Image
+              {/* <Image
                 width={75}
                 height={75}
-                src="/sol.png"
+                src="/favicon-32x32.png"
                 className={styles.icon}
                 alt="sol"
-              />
+              /> */}
             </div>
-            <h1 className={styles.h1}>Hello Solana, meet Builderz 👋</h1>
-            <p className={styles.explain}>
-              Explore what you can do with Builderz&rsquo; brand new{" "}
-              <b>Builderz xNFT Scaffold</b>
+            <h1 className={styles.h1}>Hello Solana, meet Packdog 👋</h1>
+            <p style={{ fontSize: '0.8em', margin: 0, padding: 0 }}>
+              Mint NFTs from within Backpack using <a href="https://underdogprotocol.com" target="_blank" rel="noopener" style={{ textDecoration: 'underline' }} className="text-blue-500">Underdog</a>.
             </p>
             <div className="flex flex-row gap-4 justify-around  items-center py-1">
-              <button onClick={notify} className="btn ">
-                Notify!
+              <input placeholder="NFT name" style={{ border: '1px solid #888', padding: 5, borderRadius: 5, width: '100%' }} onChange={e => setName(e.target.value)} value={name} />
+            </div>
+            <div className="flex flex-row gap-4 justify-around  items-center py-1">
+              <input placeholder="Image URL" style={{ border: '1px solid #888', padding: 5, borderRadius: 5, width: '100%' }} onChange={e => setUrl(e.target.value)} value={url} />
+            </div>
+            <div className="flex flex-row gap-4 justify-around  items-center py-1">
+              <button onClick={mintNft} className="btn" disabled={minting || !name.length || !url.length}>
+                {minting ? 'Minting...' : 'Mint NFT'}
               </button>
+              {/* <button onClick={notify} className="btn ">
+                Notify!
+              </button> */}
             </div>
           </div>
         </div>

@@ -1,4 +1,52 @@
-# Builderz Solana xNFT Scaffold (Nextjs13, Typescript, TailwindCSS, MaterialUI, web3.js)
+# packdog xNFT
+
+This is an [xNFT](https://xnft.gg) that lets you mint compressed [Solana](https://solana.com) mainnet NFTs from within [Backpack](https://backpack.app) for free! Choose a name for your NFT, specify the image URL and click _Mint_! Powered by [Underdog](https://underdogprotocol.com).
+
+Built during the 2nd [Solana Weekend Hacks](https://de.superteam.fun/solana-weekend-hacks) hackathon at [w3.hub](https://www.w3.fund/#sec-hub) in Berlin on 15.07.2023 and 16.07.2023.
+
+## Local development
+
+1. (Install [pnpm](https://pnpm.io/installation).)
+2. Clone the repo.
+3. `cd` into it and run `pnpm i` to install the dependencies.
+4. Run `pnpm dev` to start the app on port 9933.
+5. (Install and set up the [Backpack](https://backpack.app) Chrome extension.)
+6. In Backpack, click your avatar and go to Settings -> Preferences to enable Developer Mode. Click the back arrow and then the X to return to the home screen.
+7. In Backpack, go to Applications (second tab) and open Simulator. You should see the app.
+8. (Not working? You may need to change the port in [package.json](package.json) and restart the app.)
+
+## Underdog
+
+1. Get a mainnet Underdog API key.
+2. `cp .env.example .env` and add the API key.
+
+Then initialize a project with:
+
+```
+$ curl --request POST \
+     --url https://api.underdogprotocol.com/v2/projects \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer PUT-YOUR-UNDERDOG-API-KEY-HERE' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "name": "Packdog",
+  "image": "https://dev.updg8.com/imgdata/2WZMBfMsZoXoEYk6tTP35e31LKX1cApU73Y73mTePaQN",
+  "compressed": true
+}
+'
+```
+
+The response should look similar to this:
+```
+{"transactionId":"79510d01-402c-43e0-ac8d-ac6015cb2279","projectId":4,"mintAddress":"J9NDvX1Crfy6ug4V4kHMX3HcTxk8Ban5u2udDGdtnC2N"}
+```
+
+You need the `projectId`! Update it accordingly in [pages/index.tsx](pages/index.tsx). (TODO: This should be in the `.env` file.)
+
+# Original README
+
+## Builderz Solana xNFT Scaffold (Nextjs13, Typescript, TailwindCSS, MaterialUI, web3.js)
 
 This is our open source [Next.js](https://nextjs.org/) , [Solana](https://github.com/solana-labs ) xNFT Backpack Scaffold for the community and whole ecosystem - without much fluff and just the essentials. 💪
 
@@ -16,7 +64,7 @@ Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
 ![Builderz Scaffold Mobile](scaffold-mobile.png)  |  ![Builderz Scaffold Desktop](scaffold-desktop.png)
 
-## Packages included and set up
+### Packages included and set up
 
 - Nextjs13 ("old" folder structure using pages - we will release an "app" branch as soon as it's more stable)
 - Typescript (tsconfig.json set up and ready to go)
@@ -31,11 +79,11 @@ This means you wont have to set any TailwindCSS fontSizes in your work unless yo
 
 You will also find the CSS for two variations of the Button styling, "glow" and "glow-on-hover" - just tweak them to your needs and add one of those classes to your buttons if you like.
 
-## Feel free to use it as a starting point for your next Solana project
+### Feel free to use it as a starting point for your next Solana project
 
 Also feel free to send us feedback, open an issue or even PR and contribute by creating your own components, refactoring or other improvements.
 
-## Getting Started
+### Getting Started
 
 Create a project using this example:
 
@@ -63,7 +111,7 @@ On `pages/_app.tsx`, you'll find `ThemeProvider` for light/dark mode, "ContextPr
 Although we are using Nextjs13 we are using the "old" folder structure as long as the "app" structure is in experimental mode.
 We will add a `app-structure` branch as soon as its running more stable soon.
 
-## Learn More
+### Learn More
 
 To learn more about Solana and Next.js, take a look at the following resources:
 
@@ -80,6 +128,6 @@ To learn more about Solana and Next.js, take a look at the following resources:
 
 You can check out [the Cynova GitHub organization](https://github.com/cynova-enterprise) - your feedback and contributions are welcome!
 
-## Join our Discord
+### Join our Discord
 
 For any questions, suggestions, join our discord at [https://discord.gg/cynova-enterprise](https://discord.gg/cynova-enterprise).

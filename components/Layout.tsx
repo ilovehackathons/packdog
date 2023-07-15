@@ -13,9 +13,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <MyMain className="flex-1 text-black bg-white p-2">
         {children}
       </MyMain>
-      <div className="fixed bottom-0 w-full ">
+      {/* <div className="fixed bottom-0 w-full ">
         <Tabs />
-      </div>
+      </div> */}
     </div>
   );
 }
