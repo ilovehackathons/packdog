@@ -1,0 +1,21 @@
+{
+  "name": "Packdog",
+  "version": "0.0.1",
+  "description": "Mint your own image NFT using Underdog.",
+  "longDescription": "Mint mainnet NFTs from within Backpack for free! Choose a name for your NFT, specify the image URL and click 'Mint'! Powered by Underdog.",
+  "website": "https://github.com/ilovehackathons/packdog",
+  "kind": "app",
+  "storage": "ipfs",
+  "icon": {
+    "md": "./logo.png"
+  },
+  "contact": "https://twitter.com/ihackhackathons",
+  "tag": "nfts",
+  "programIds": [],
+  "screenshots": ["./screenshot.png"],
+  "entrypoints": {
+    "default": {
+      "web": "https://packdog.vercel.app"
+    }
+  }
+}

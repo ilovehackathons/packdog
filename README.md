@@ -1,4 +1,6 @@
-# packdog xNFT
+# Packdog xNFT
+
+[Go to xnft.gg to install.](https://www.xnft.gg/app/CjAThfNhKhPL7cdYuZn5UMVSDJD9ECT6AwvAbCQ6gLRX) A [Chrome](https://chrome.com)-based browser with the [Backpack](https://backpack.app) Chrome extension installed is required.
 
 This is an [xNFT](https://xnft.gg) that lets you mint compressed [Solana](https://solana.com) mainnet NFTs from within [Backpack](https://backpack.app) for free! Choose a name for your NFT, specify the image URL and click _Mint_! Powered by [Underdog](https://underdogprotocol.com).
 
@@ -43,6 +45,22 @@ The response should look similar to this:
 ```
 
 You need the `projectId`! Update it accordingly in [pages/index.tsx](pages/index.tsx). (TODO: This should be in the `.env` file.)
+
+## xnft.gg
+
+If you have made changes to this xNFT and want to [publish them](https://xnft.gg/publish) as a new xNFT in the [xNFT Library](https://xnft.gg), follow these steps:
+
+1. Deploy the app on [Vercel](https://vercel.com) and and get the URL (e.g. `https://packdog.vercel.app`).
+2. Update the URL in [xnft.gg/xnft.json](xnft.gg/xnft.json). You can also change the name, description, etc. there.
+3. Optionally, replace [xnft.gg/logo.png](xnft.gg/logo.png) with your own logo and [xnft.gg/screenshot.png](xnft.gg/screenshot.png) with your own screenshot.
+4. Delete the existing [xnft.gg.zip](xnft.gg.zip) (`rm xnft.gg.zip`) and generate a new one by compressing the entire [xnft.gg](./xnft.gg) directory.
+5. (Found your Backpack wallet with a small amount of mainnet SOL, e.g. 0.03.)
+6. Upload the ZIP file on https://www.xnft.gg/publish. This will cost about 0.02 SOL.
+7. Click the _Free_ button to install it in Backpack. This will cost about 0.002 SOL.
+8. Join the [Backpack Discord server](https://discord.com/invite/backpack).
+9. In the `#-dev-verify` channel (_Welcome_ section), react with the computer emoji to gain access to the developer channels.
+10. In the `#appstore-submission-whitelist` (_Developers_ subsection) provide a link to your xNFT on xnft.gg and ask them to whitelist it.
+11. Once it's whitelisted, go to _Applications_ (second tab) in Backpack and open your xNFT.
 
 # Original README
 
