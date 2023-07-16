@@ -58,7 +58,7 @@ const Home = () => {
       //   transferable: false,
       //   compressed: true,
       // },
-      projectId: 5,
+      projectId: 6,
     };
 
     try {
@@ -144,9 +144,9 @@ const Home = () => {
     const file = files[0]
     let vaults = await a?.vault.list()
 
-    if (!vaults.items || !vaults.items.length || vaults.items.length < 3) {
+    if (!vaults.items || !vaults.items.length || vaults.items.length < 4) {
       // throw new Error('User does not have any vaults')
-      await a.vault.create("my third vault", { public: true });
+      await a.vault.create("Packdog", { public: true });
       vaults = await akord?.vault.list()!
     }
     const vault = vaults.items[0]
