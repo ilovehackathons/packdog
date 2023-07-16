@@ -65,6 +65,13 @@ If you have made changes to this xNFT and want to [publish them](https://xnft.gg
 ## Useful links
 
 - [Shows your NFTs immediately](https://token-display.vercel.app)
+- [xNFT running locally](http://localhost:9933) (Run `pnpm dev` first.)
+- [xNFT on Vercel](https://packdog.vercel.app)
+- [JPEG on Arweave](https://arweave.net/jveua4L0An963dfUA7huUQ5Hx66ir2JOUOrb8v4V82A)
+- [Same JPEG cached by Underdog](https://updg8.com/imgdata/DyDqi33Gbq2RsgW78jrQhSQZwi4pY21BSWKnjyLjJGR6)
+- [Corresponding NFT on XRAY](https://xray.helius.xyz/token/8XSifXYfhw95cp2SHNL1RMVVVNbHLBEpdAzcRCcyKHV2)
+- [Akord](https://akord.com/) (Arweave API)
+- [Builderz xNFT scaffold](https://github.com/builderz-labs/builderz-xNFT-scaffold-next)
 
 # Original README
 
