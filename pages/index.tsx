@@ -3,11 +3,13 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { toast } from "react-toastify";
 import Head from "next/head";
+// import { AkordWallet } from "@akord/crypto";
 
 import "react-toastify/dist/ReactToastify.css";
 import { createUnderdogClient } from "@underdog-protocol/js";
 import { useWallet } from "../hooks/useWallet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Akord, Auth } from '@akord/akord-js'
 
 if (typeof window !== 'undefined') {
   window.addEventListener('error', function (event) {
@@ -16,9 +18,36 @@ if (typeof window !== 'undefined') {
   });
 }
 
-const Home: NextPage = () => {
-  // const notify = () =>
-  //   toast("🦄 Wow so easy!");
+// TODO: Switch to App Router
+// async function getAkordCredentials() {
+//   return {
+//     email: process.env.AKORD_EMAIL,
+//     password: process.env.AKORD_PASSWORD,
+//   }
+// }
+
+type AkordCreds = {
+  email?: string,
+  password?: string
+}
+
+const Home = () => {
+  // TODO: Switch to App Router
+  // const akordCreds = await getAkordCredentials()
+  // console.log('akordCreds', akordCreds)
+
+  const [akordCreds, setAkordCreds] = useState<AkordCreds>({})
+
+  useEffect(() => {
+    async function fetchAkordCreds() {
+      setAkordCreds(await (await fetch('/api/akord')).json())
+    }
+    fetchAkordCreds()
+  }, [])
+
+  // useEffect(() => {
+  //   console.log('akordCreds changed:', akordCreds)
+  // }, [akordCreds])
 
   const mintNft = async () => {
     setMinting(true)
@@ -29,7 +58,7 @@ const Home: NextPage = () => {
       //   transferable: false,
       //   compressed: true,
       // },
-      projectId: 4,
+      projectId: 5,
     };
 
     try {
@@ -63,11 +92,86 @@ const Home: NextPage = () => {
   const [url, setUrl] = useState("")
   const [name, setName] = useState("")
   const [minting, setMinting] = useState(false)
+  const [uploading, setUploading] = useState(false)
+  const [waiting, setWaiting] = useState(false)
+
+  const [akord, setAkord] = useState<Akord | null>()
+
+  // console.log('process.env.AKORD_EMAIL', process.env.AKORD_EMAIL);
+
+  // useEffect(() => {
+  // async function initAkord() {
+  //   console.log('signing in...')
+  //   try {
+  //     const { wallet } = await Auth.signIn(process.env.AKORD_EMAIL, process.env.AKORD_PASSWORD);
+  //     console.log('wallet', wallet)
+  //   } catch (e) {
+  //     console.log('Error:', e)
+  //   }
+  //   // const akord = await Akord.init(wallet)
+  //   // console.log('akord', akord)
+  //   // setAkord(akord)
+  // }
+
+  // // Unauthorized [Error]: Invalid authorization header.
+  // async function initAkordWithApiKey() {
+  //   Auth.configure({ apiKey: process.env.AKORD_API_KEY })
+  //   const wallet = await AkordWallet.importFromBackupPhrase(process.env.AKORD_BACKUP_PHRASE)
+  //   const akord = await Akord.init(wallet, { apiKey: process.env.AKORD_API_KEY })
+  //   console.log('akord', akord)
+  //   setAkord(akord)
+  // }
+
+  // initAkord()
+  // }, [])
+
+  const handleUpload = async (files: FileList | null) => {
+    let a: Akord = akord!;
+    if (!a) {
+      // const { wallet } = await Auth.signIn(process.env.AKORD_EMAIL, process.env.AKORD_PASSWORD);
+      const { wallet } = await Auth.signIn(akordCreds.email!, akordCreds.password!); // TODO
+      const akord = await Akord.init(wallet)
+      setAkord(akord)
+      a = akord
+      // throw new Error('Akord-js not initialized')
+    }
+    if (!files || !files.length) {
+      throw new Error('Failed uploading the file')
+    }
+    setUploading(true)
+    const file = files[0]
+    let vaults = await a?.vault.list()
+
+    if (!vaults.items || !vaults.items.length || vaults.items.length < 3) {
+      // throw new Error('User does not have any vaults')
+      await a.vault.create("my third vault", { public: true });
+      vaults = await akord?.vault.list()!
+    }
+    const vault = vaults.items[0]
+    console.log('vault', vault)
+    // confirm("Uploading file to vault: " + vault.name)
+    const stack = await a.stack.create(vault.id, file, file.name)
+
+    // confirm("Created stack: " + stack.stackId)
+    const host = `https://arweave.net`
+    const arweaveId = stack.object.versions[0].resourceUri[0].replace('arweave:', '')
+    const arweaveUrl = `${host}/${arweaveId}`
+    console.log('Arweave URL', arweaveUrl)
+    // setAkord(null)
+    setUrl(arweaveUrl)
+
+    setUploading(false)
+
+    setWaiting(true)
+    setTimeout(() => {
+      setWaiting(false)
+    }, 1000 * 60);
+  }
 
   return (
     <>
       <Head>
-        <title>Builderz xNFT Scaffold</title>
+        <title>Packdog xNFT</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
@@ -100,7 +204,7 @@ const Home: NextPage = () => {
                 alt="sol"
               /> */}
             </div>
-            <h1 className={styles.h1}>Hello Solana, meet Packdog 👋</h1>
+            {/* <h1 className={styles.h1}>Hello Solana, meet Packdog 👋</h1> */}
             <p style={{ fontSize: '0.8em', margin: 0, padding: 0 }}>
               Mint NFTs from within Backpack using <a href="https://underdogprotocol.com" target="_blank" rel="noopener" style={{ textDecoration: 'underline' }} className="text-blue-500">Underdog</a>.
             </p>
@@ -108,11 +212,17 @@ const Home: NextPage = () => {
               <input placeholder="NFT name" style={{ border: '1px solid #888', padding: 5, borderRadius: 5, width: '100%' }} onChange={e => setName(e.target.value)} value={name} />
             </div>
             <div className="flex flex-row gap-4 justify-around  items-center py-1">
+              <input
+                type="file"
+                onChange={(e) => handleUpload(e.target.files)}
+              />
+            </div>
+            <div className="flex flex-row gap-4 justify-around  items-center py-1">
               <input placeholder="Image URL" style={{ border: '1px solid #888', padding: 5, borderRadius: 5, width: '100%' }} onChange={e => setUrl(e.target.value)} value={url} />
             </div>
             <div className="flex flex-row gap-4 justify-around  items-center py-1">
               <button onClick={mintNft} className="btn" disabled={minting || !name.length || !url.length}>
-                {minting ? 'Minting...' : 'Mint NFT'}
+                {minting ? 'Minting...' : uploading ? 'Uploading to Arweave...' : waiting ? 'Waiting 1 minute...' : 'Mint NFT'}
               </button>
               {/* <button onClick={notify} className="btn ">
                 Notify!
