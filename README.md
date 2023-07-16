@@ -2,7 +2,7 @@
 
 **[Go to xnft.gg to install.](https://www.xnft.gg/app/CjAThfNhKhPL7cdYuZn5UMVSDJD9ECT6AwvAbCQ6gLRX)** A [Chrome](https://chrome.com)-based browser with the [Backpack](https://backpack.app) extension installed is required.
 
-This is an [xNFT](https://www.coral.community/post/wtf-are-xnfts) that lets you mint compressed [Solana](https://solana.com) mainnet NFTs from within [Backpack](https://backpack.app) for free! Choose a name for your NFT, specify the image URL and click _Mint_! Powered by [Underdog](https://underdogprotocol.com).
+This is an [xNFT](https://www.coral.community/post/wtf-are-xnfts) that lets you mint compressed [Solana](https://solana.com) mainnet NFTs from within [Backpack](https://backpack.app) for free! Choose a name for your NFT, specify the image URL (or upload a local image to Arweave) and click _Mint_! Powered by [Underdog](https://underdogprotocol.com).
 
 Built during the 2nd [Solana Weekend Hacks](https://de.superteam.fun/solana-weekend-hacks) hackathon at [w3.hub](https://www.w3.fund/#sec-hub) in Berlin on 15.07.2023 and 16.07.2023. The inspiration was an [open issue](https://github.com/coral-xyz/xnft-wishlist/issues/1) in Coral's xNFT wishlist.
 
