@@ -8,6 +8,9 @@ dependencies:
   '@akord/akord-js':
     specifier: ^4.16.1
     version: 4.16.1
+  '@akord/crypto':
+    specifier: ^0.11.0
+    version: 0.11.0
   '@emotion/react':
     specifier: ^11.10.5
     version: 11.10.5(@babel/core@7.22.9)(@types/react@18.0.25)(react@18.2.0)
@@ -35,9 +38,6 @@ dependencies:
   '@solana/web3.js':
     specifier: ^1.66.2
     version: 1.66.2
-  '@types/node':
-    specifier: 18.14.6
-    version: 18.14.6
   '@underdog-protocol/js':
     specifier: ^0.4.9
     version: 0.4.9(@babel/core@7.22.9)(react-native@0.72.3)
@@ -79,6 +79,9 @@ dependencies:
     version: 5.3.6(@babel/core@7.22.9)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
 
 devDependencies:
+  '@types/node':
+    specifier: ^18.11.9
+    version: 18.14.6
   '@types/react':
     specifier: ^18.0.25
     version: 18.0.25
@@ -1665,8 +1668,8 @@ packages:
       - immer
     dev: false
 
-  /@coral-xyz/themes@0.7.0-latest.323(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@types/react@18.0.25)(react-dom@18.2.0):
-    resolution: {integrity: sha512-2ImDl6aFduMvZJBuWiMPrDmahD1/R+vZW8qHl+JUdrAjIiQnfqzm+lPxADDGVs8yh7XJ7Fav909xmOm+1BKubQ==}
+  /@coral-xyz/themes@0.7.0-latest.327(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@types/react@18.0.25)(react-dom@18.2.0):
+    resolution: {integrity: sha512-6EO7Zl9QQLoRXI8Q94vj0E8yJeoGwVbkEEeurxXMLVPwApF2iOuai1Aq8qG2Hzw99o2MWNhuJXFDF5k+t9YjlQ==}
     dependencies:
       '@mui/material': 5.10.15(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@types/react@18.0.25)(react-dom@18.2.0)(react@18.2.0)
       '@mui/styles': 5.14.0(@types/react@18.0.25)(react@18.2.0)
@@ -3814,7 +3817,6 @@ packages:
 
   /@types/node@18.14.6:
     resolution: {integrity: sha512-93+VvleD3mXwlLI/xASjw0FzKcwzl3OdTCzm1LaRfqgS21gfFtK3zDXM5Op9TeeMsJVOaJ2VRDpT9q4Y3d0AvA==}
-    dev: false
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -8061,7 +8063,7 @@ packages:
     resolution: {integrity: sha512-BrcTZKBTL0FVm8yPXmBHNSQ8zZEbSQtfnXZZnwLdM3XoaKUJC+ff16p6uR3nwEo5hJIBxTdpon88IcfBdSdK/A==}
     dependencies:
       '@coral-xyz/common-public': 0.2.0-latest.3375
-      '@coral-xyz/themes': 0.7.0-latest.323(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@types/react@18.0.25)(react-dom@18.2.0)
+      '@coral-xyz/themes': 0.7.0-latest.327(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@types/react@18.0.25)(react-dom@18.2.0)
       '@solana/web3.js': 1.66.2
       eventemitter3: 4.0.7
       react: 18.2.0
