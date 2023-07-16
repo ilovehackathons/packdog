@@ -93,6 +93,7 @@ const Home = () => {
   const [name, setName] = useState("")
   const [minting, setMinting] = useState(false)
   const [uploading, setUploading] = useState(false)
+  // const [uploaded, setUploaded] = useState(false)
   const [waiting, setWaiting] = useState(false)
 
   const [akord, setAkord] = useState<Akord | null>()
@@ -126,6 +127,7 @@ const Home = () => {
   // }, [])
 
   const handleUpload = async (files: FileList | null) => {
+    // setUploaded(false)
     let a: Akord = akord!;
     if (!a) {
       // const { wallet } = await Auth.signIn(process.env.AKORD_EMAIL, process.env.AKORD_PASSWORD);
@@ -165,6 +167,7 @@ const Home = () => {
     setWaiting(true)
     setTimeout(() => {
       setWaiting(false)
+      // setUploaded(true)
     }, 1000 * 60);
   }
 
@@ -219,6 +222,11 @@ const Home = () => {
             </div>
             <div className="flex flex-row gap-4 justify-around  items-center py-1">
               <input placeholder="Image URL" style={{ border: '1px solid #888', padding: 5, borderRadius: 5, width: '100%' }} onChange={e => setUrl(e.target.value)} value={url} />
+              <a href={url} target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+              </a>
             </div>
             <div className="flex flex-row gap-4 justify-around  items-center py-1">
               <button onClick={mintNft} className="btn" disabled={minting || !name.length || !url.length}>
