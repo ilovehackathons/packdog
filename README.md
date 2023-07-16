@@ -62,6 +62,10 @@ If you have made changes to this xNFT and want to [publish them](https://xnft.gg
 10. In the `#appstore-submission-whitelist` (_Developers_ section) provide a link to your xNFT on xnft.gg and ask them to whitelist it.
 11. Once it's whitelisted, go to _Applications_ (second tab) in Backpack and open your xNFT.
 
+## Useful links
+
+- [Shows your NFTs immediately](https://token-display.vercel.app)
+
 # Original README
 
 ## Builderz Solana xNFT Scaffold (Nextjs13, Typescript, TailwindCSS, MaterialUI, web3.js)
